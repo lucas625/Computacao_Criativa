@@ -5,25 +5,29 @@
 [ext_resource path="res://scenes/Main.gd" type="Script" id=3]
 
 [node name="Main" type="Node2D"]
-pause_mode = 1
 position = Vector2( -0.067, 0 )
 script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 512.067, 256 )
 
-[node name="Pause" type="Control" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Pause" type="Control" parent="CanvasLayer"]
 pause_mode = 2
-margin_right = 40.0
+visible = false
+margin_left = -0.067
+margin_right = 39.933
 margin_bottom = 40.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BlackOverlay" type="ColorRect" parent="Pause"]
+[node name="BlackOverlay" type="ColorRect" parent="CanvasLayer/Pause"]
 margin_left = -5.33936
 margin_top = -16.0181
 margin_right = 1040.66
 margin_bottom = 611.982
-color = Color( 0, 0, 0, 0.2 )
+color = Color( 0, 0, 0, 0.588235 )
