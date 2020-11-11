@@ -6,9 +6,11 @@
 
 [node name="Main" type="Node2D"]
 position = Vector2( -0.067, 0 )
+scale = Vector2( 1.00044, 0.970892 )
 script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+
 position = Vector2( 512.067, 256 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -31,3 +33,6 @@ margin_top = -16.0181
 margin_right = 1040.66
 margin_bottom = 611.982
 color = Color( 0, 0, 0, 0.588235 )
+
+position = Vector2( 319.925, 271.915 )
+
