@@ -1,6 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/Pause.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Main.gd" type="Script" id=3]
 
@@ -36,3 +37,4 @@ color = Color( 0, 0, 0, 0.588235 )
 
 position = Vector2( 319.925, 271.915 )
 
+[node name="Background" parent="." instance=ExtResource( 1 )]
