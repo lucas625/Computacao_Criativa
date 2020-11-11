@@ -19,6 +19,10 @@ config/name="grupo 05"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://images/icon.png"
 
+[display]
+
+window/size/width=600
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
