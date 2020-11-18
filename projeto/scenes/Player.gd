@@ -27,3 +27,7 @@ func check_for_match(word):
 		if zombie.word.casecmp_to(typing) == 0:
 			zombie.queue_free()
 			update_typing("")
+	if still_matches:
+		label.set("custom_colors/font_color", Color.green)
+	else:
+		label.set("custom_colors/font_color", Color.red)
