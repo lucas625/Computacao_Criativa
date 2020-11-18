@@ -10,7 +10,7 @@ export (float) var seconds_between_zombies = 1.5
 var screen_size = Vector2(600,600)
 var zombie_scene = preload("res://scenes/Zombie.tscn")
 
-
+onready var score = $Score
 
 func _ready():
 	randomize()
@@ -110,3 +110,7 @@ func find_images():
 	else:
 		dir.open(exe_path)
 		dir.make_dir("faces")
+
+
+func _on_Player_score(value):
+	score.text = String(value)

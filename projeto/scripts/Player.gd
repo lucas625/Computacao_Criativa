@@ -1,6 +1,10 @@
 extends Area2D
 
+signal score(value)
+
 var typing = ""
+
+var score = 0
 
 onready var label = $Label
 
@@ -27,6 +31,8 @@ func check_for_match(word):
 		if zombie.word.casecmp_to(typing) == 0:
 			zombie.queue_free()
 			update_typing("")
+			score = score + 1
+			emit_signal("score", score)
 	if still_matches:
 		label.set("custom_colors/font_color", Color.green)
 	else:
