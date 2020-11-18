@@ -5,7 +5,7 @@ var typing = ""
 onready var label = $Label
 
 func _unhandled_input(event):
-	if event is InputEventKey:
+	if event is InputEventKey and event.pressed:
 		if event.scancode >= 65 and event.scancode <= 90: #a to z
 			typing = typing + char(event.scancode)
 			print (event.scancode)

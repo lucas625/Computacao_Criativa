@@ -4,8 +4,19 @@ export (float) var speed = 35
 
 export (Vector2) var target = Vector2(0,0)
 
+var word = ""
+
+onready var label = $Label
+
 func set_target(value):
 	target = value
+
+func set_word(value):
+	word = value
+
+func _ready():
+	add_to_group("zombies")
+	label.text = word
 
 func _physics_process(delta):
 	var direction = (target - self.position).normalized()
