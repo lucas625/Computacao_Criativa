@@ -6,7 +6,7 @@
 radius = 20.0
 height = 10.0
 
-[node name="Player" type="StaticBody2D"]
+[node name="Player" type="Area2D"]
 position = Vector2( 0, -8 )
 __meta__ = {
 "_edit_group_": true

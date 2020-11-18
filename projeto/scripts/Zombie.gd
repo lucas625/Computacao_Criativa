@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 
 export (float) var speed = 35
 
@@ -10,9 +10,7 @@ func set_target(value):
 func _physics_process(delta):
 	var direction = (target - self.position).normalized()
 	var velocity = direction * speed
-	move_and_slide(velocity)
+	position += velocity*delta
 
-
-
-func _on_Area2D_body_entered(body):
+func _on_Zombie_area_entered(area):
 	get_tree().reload_current_scene() # Replace with function body.
