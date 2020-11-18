@@ -34,6 +34,8 @@ var screen_size = Vector2(600,600)
 var zombie_scene = preload("res://scenes/Zombie.tscn")
 
 func _ready():
+	randomize()
+	
 	var timer = Timer.new()
 
 	# Set timer interval
