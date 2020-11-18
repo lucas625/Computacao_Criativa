@@ -1,32 +1,7 @@
 extends Node2D
 
-var example_words = [
-	"FEAR",
-	"DARK",
-	"SOMEONE",
-	"THERE",
-	"ALWAYS",
-	"PHOBIA",
-	"NICE",
-	"PUNCH",
-	"HORIZON",
-	"KING",
-	"MOTHER",
-	"WORLD",
-	"HEART",
-	"ROCK",
-	"THUNDER",
-	"PAINT",
-	"BARRACUDA",
-	"CIRCUS",
-	"PSYCHO",
-	"WIND",
-	"CHANGE",
-	"HERO",
-	"HELL",
-	"WEDDING",
-	"TURBO"
-]
+var words = []
+var words_loaded = false
 var word_index = 0
 
 var textures = []
@@ -35,9 +10,13 @@ export (float) var seconds_between_zombies = 1.5
 var screen_size = Vector2(600,600)
 var zombie_scene = preload("res://scenes/Zombie.tscn")
 
+
+
 func _ready():
 	randomize()
 	
+	if !words_loaded:
+		load_words()
 	find_images()
 	
 	var timer = Timer.new()
@@ -56,7 +35,21 @@ func _ready():
 
 	timer.start()
 	
-	example_words.shuffle()
+	words.shuffle()
+
+func load_words():
+	var words_dict = {}
+	var file = File.new()
+	file.open("res://words/base_words.json", file.READ)
+	var text = file.get_as_text()
+	words_dict = JSON.parse(text).result
+	file.close()
+	var lower_words = words_dict["words"]
+	
+	for word in lower_words:
+		words.append(word.to_upper())
+		
+	words_loaded = true
 
 func create_zombie():
 	var zombie_instance = zombie_scene.instance()
@@ -65,7 +58,7 @@ func create_zombie():
 	var random_position = find_random_position(screen_size)
 	zombie_instance.set_position(random_position)
 	
-	var zombie_word = example_words[word_index]
+	var zombie_word = words[word_index]
 	zombie_instance.set_word(zombie_word)
 	
 	if textures.size() > 0:
@@ -73,7 +66,7 @@ func create_zombie():
 		zombie_instance.set_texture(textures[texture_index])
 	
 	word_index = word_index + 1
-	if word_index == example_words.size():
+	if word_index == words.size():
 		word_index = 0
 
 	self.add_child(zombie_instance)
