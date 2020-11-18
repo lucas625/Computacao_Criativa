@@ -29,12 +29,16 @@ var example_words = [
 ]
 var word_index = 0
 
+var textures = []
+
 export (float) var seconds_between_zombies = 1.5
 var screen_size = Vector2(600,600)
 var zombie_scene = preload("res://scenes/Zombie.tscn")
 
 func _ready():
 	randomize()
+	
+	find_images()
 	
 	var timer = Timer.new()
 
@@ -64,6 +68,9 @@ func create_zombie():
 	var zombie_word = example_words[word_index]
 	zombie_instance.set_word(zombie_word)
 	
+	var texture_index = randi() % textures.size()
+	zombie_instance.set_texture(textures[texture_index])
+	
 	word_index = word_index + 1
 	if word_index == example_words.size():
 		word_index = 0
@@ -84,4 +91,28 @@ func find_random_position(screen_size):
 	
 	return circle_point + center
 	
-
+func find_images():
+	var dir = Directory.new()
+	var exe_path = OS.get_executable_path().get_base_dir()
+	if dir.open(exe_path.plus_file("faces")) == OK:
+		
+		var image_names = []
+		
+		#finding valid file names
+		dir.list_dir_begin(true)
+		var file = dir.get_next()
+		while file != "":
+			if not dir.current_is_dir() and (file.ends_with(".jpg") or file.ends_with(".png") or file.ends_with(".bmp") or file.ends_with(".webp")):
+				image_names.append(file)
+			file = dir.get_next()
+		
+		#loading images
+		for image_name in image_names:
+			var tex = ImageTexture.new()
+			var image = Image.new()
+			image.load(exe_path.plus_file("faces").plus_file(image_name))
+			tex.create_from_image(image)
+			textures.append(tex)
+	else:
+		dir.open(exe_path)
+		dir.make_dir("faces")
