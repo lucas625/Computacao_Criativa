@@ -68,8 +68,9 @@ func create_zombie():
 	var zombie_word = example_words[word_index]
 	zombie_instance.set_word(zombie_word)
 	
-	var texture_index = randi() % textures.size()
-	zombie_instance.set_texture(textures[texture_index])
+	if textures.size() > 0:
+		var texture_index = randi() % textures.size()
+		zombie_instance.set_texture(textures[texture_index])
 	
 	word_index = word_index + 1
 	if word_index == example_words.size():
