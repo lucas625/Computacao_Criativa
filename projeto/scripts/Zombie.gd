@@ -37,4 +37,5 @@ func _physics_process(delta):
 	position += velocity*delta
 
 func _on_Zombie_area_entered(area):
-	get_tree().reload_current_scene() # Replace with function body.
+	if "typing" in area:
+		get_tree().reload_current_scene() # Replace with function body.

@@ -50,4 +50,5 @@ text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="bullet" from="Player" to="." method="_on_Player_bullet"]
 [connection signal="score" from="Player" to="." method="_on_Player_score"]

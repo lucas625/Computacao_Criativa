@@ -111,6 +111,8 @@ func find_images():
 		dir.open(exe_path)
 		dir.make_dir("faces")
 
-
 func _on_Player_score(value):
 	score.text = String(value)
+
+func _on_Player_bullet(value):
+	add_child(value)

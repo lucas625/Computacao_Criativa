@@ -14,6 +14,7 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
 [node name="Zombie" type="Area2D"]
+collision_layer = 2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
