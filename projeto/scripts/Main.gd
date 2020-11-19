@@ -40,7 +40,7 @@ func _ready():
 func load_words():
 	var words_dict = {}
 	var file = File.new()
-	file.open("res://words/base_words.json", file.READ)
+	file.open("res://words/words.tres", file.READ)
 	var text = file.get_as_text()
 	words_dict = JSON.parse(text).result
 	file.close()
