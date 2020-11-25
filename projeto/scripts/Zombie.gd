@@ -10,13 +10,8 @@ var word = ""
 
 var texture: Texture
 var head_scale = 1.0
-onready var sound_player = $AudioStreamPlayer
-var pitch = 1.0
 onready var label = $Z/Label
 onready var head = $HeadSprite
-
-func play_death():
-	sound_player.play()
 
 func set_target(value):
 	target = value
@@ -34,7 +29,6 @@ func _ready():
 	head.texture = texture
 	head.scale.x = head_scale
 	head.scale.y = head_scale
-	sound_player.pitch_scale = pitch
 
 func _physics_process(delta):
 	if target != null:

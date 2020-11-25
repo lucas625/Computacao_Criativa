@@ -1,9 +1,19 @@
 extends Area2D
 
+enum TypingFeedback {
+	KILL = 0,
+	RIGHT = 1,
+	WRONG = 2
+}
+
 signal score(value)
 signal bullet(value)
 
 export var move_speed = 100
+
+export (AudioStream) var kill_sound
+export (AudioStream) var right_sound
+export (AudioStream) var wrong_sound
 
 var typing = ""
 
@@ -12,6 +22,7 @@ var score = 0
 var bullet_scene = preload("res://scenes/Bullet.tscn")
 
 onready var label = $Label
+onready var audio = $AudioStreamPlayer
 
 func _unhandled_input(event):
 	if event is InputEventKey and event.pressed:
@@ -35,23 +46,36 @@ func update_typing(word):
 
 func check_for_match(word):
 	var zombies = get_tree().get_nodes_in_group("zombies")
-	var still_matches = false
+	var feedback = TypingFeedback.WRONG
+	
 	for zombie in zombies:
 		if zombie.word.begins_with(typing):
-			still_matches = true
+			feedback = TypingFeedback.RIGHT
+
 		if zombie.word == typing:
 			#instance bullet that will home into zombie, send to main through signal
 			var bullet_instance = bullet_scene.instance()
 			bullet_instance.set_bullet(zombie, typing)
 			bullet_instance.position = position
 			emit_signal("bullet", bullet_instance)
-			zombie.play_death()
 			#increase score, send value to amin through signal
 			score = score + 1
 			emit_signal("score", score)
 			#erase typing
 			update_typing("")
-	if still_matches:
-		label.set("custom_colors/font_color", Color.green)
-	else:
-		label.set("custom_colors/font_color", Color.red)
+			#sound feedback
+			feedback = TypingFeedback.KILL
+			break
+	
+	match feedback:
+		TypingFeedback.KILL:
+			audio.stream = kill_sound
+			audio.play()
+		TypingFeedback.RIGHT:
+			audio.stream = right_sound
+			audio.play()
+			label.set("custom_colors/font_color", Color.green)
+		TypingFeedback.WRONG:
+			audio.stream = wrong_sound
+			audio.play()
+			label.set("custom_colors/font_color", Color.red)
