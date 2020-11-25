@@ -53,7 +53,7 @@ func load_words():
 
 func create_zombie():
 	var zombie_instance = zombie_scene.instance()
-	zombie_instance.set_target(self.get_node("Player").position)
+	zombie_instance.set_target($Player)
 	
 	var random_position = find_random_position(screen_size)
 	zombie_instance.set_position(random_position)

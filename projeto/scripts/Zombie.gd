@@ -4,7 +4,7 @@ export var head_max = 40.0
 
 export (float) var speed = 35
 
-export (Vector2) var target = Vector2(0,0)
+var target
 
 var word = ""
 
@@ -37,9 +37,10 @@ func _ready():
 	sound_player.pitch_scale = pitch
 
 func _physics_process(delta):
-	var direction = (target - self.position).normalized()
-	var velocity = direction * speed
-	position += velocity*delta
+	if target != null:
+		var direction = (target.position - self.position).normalized()
+		var velocity = direction * speed
+		position += velocity*delta
 
 func _on_Zombie_area_entered(area):
 	if "typing" in area:

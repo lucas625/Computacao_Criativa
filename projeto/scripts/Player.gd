@@ -3,6 +3,8 @@ extends Area2D
 signal score(value)
 signal bullet(value)
 
+export var move_speed = 100
+
 var typing = ""
 
 var score = 0
@@ -20,6 +22,12 @@ func _unhandled_input(event):
 			update_typing(typing.substr(0, typing.length()-1))
 			check_for_match(typing)
 	pass
+
+func _physics_process(delta):
+	var direction = Vector2(0,0)
+	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	direction.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+	position = position + (direction.normalized() * move_speed * delta)
 
 func update_typing(word):
 	typing = word
