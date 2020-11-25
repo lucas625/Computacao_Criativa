@@ -7,7 +7,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 12.0
-height = 27.5537
+height = 9.0
 
 [sub_resource type="DynamicFont" id=2]
 outline_size = 1
@@ -27,7 +27,6 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1.77466, 0.276861 )
 shape = SubResource( 1 )
 
 [node name="HeadSprite" type="Sprite" parent="."]
