@@ -37,6 +37,7 @@ func check_for_match(word):
 			bullet_instance.set_bullet(zombie, typing)
 			bullet_instance.position = position
 			emit_signal("bullet", bullet_instance)
+			zombie.play_death()
 			#increase score, send value to amin through signal
 			score = score + 1
 			emit_signal("score", score)
