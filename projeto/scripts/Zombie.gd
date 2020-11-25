@@ -12,7 +12,7 @@ var texture: Texture
 var head_scale = 1.0
 onready var sound_player = $AudioStreamPlayer
 var pitch = 1.0
-onready var label = $Label
+onready var label = $Z/Label
 onready var head = $HeadSprite
 
 func play_death():
